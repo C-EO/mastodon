@@ -6,6 +6,8 @@ RSpec.configure do |config|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
 
+  config.disable_monkey_patching!
+
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
@@ -30,10 +32,6 @@ RSpec.configure do |config|
     require 'rspec/github'
     config.add_formatter RSpec::Github::Formatter
   end
-end
-
-def body_as_json
-  response.parsed_body
 end
 
 def serialized_record_json(record, serializer, adapter: nil)

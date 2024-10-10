@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe 'API V1 Streaming' do
+RSpec.describe 'API V1 Streaming' do
   around do |example|
     before = Rails.configuration.x.streaming_api_base_url
     Rails.configuration.x.streaming_api_base_url = "wss://#{Rails.configuration.x.web_domain}"
@@ -17,6 +17,8 @@ describe 'API V1 Streaming' do
         get '/api/v1/streaming'
 
         expect(response).to have_http_status(404)
+        expect(response.content_type)
+          .to start_with('application/json')
       end
     end
   end
